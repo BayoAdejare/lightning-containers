@@ -1,0 +1,18 @@
+# Data files
+*.nc
+*.csv
+*.crc
+*.parquet
+data/
+# Database
+*.db
+*.db.wal
+checkpoint/
+spark-warehouse/
+# packaging
+**build
+**__pycache__
+*.pyc
+*.egg-info/
+*.egg
+# .env
