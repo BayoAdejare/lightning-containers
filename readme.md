@@ -6,7 +6,7 @@
 
 </div>
 
-[![Open in Streamlit](streamlit.io)](streamlit.io)
+[![Open in Streamlit](streamlit.io)](streamlit.io)]
 
 ## Introduction 
 
@@ -19,7 +19,7 @@ Processing done using Pandas dataframes, SQlite with Spatialite extension as the
 
 |<a href="img/main_tech_stack.png" align="center"><img src="img/main_tech_stack.png" alt="Technologies used and respective logos" width="800px"/></a>
 |:--:|
-|Docker + Prefect + PySpark + Parquet|
+|Architecture: Docker + Prefect + Pandas + SQLite + Streamlit|
 
 **Brief Data Summary [Lightning Cluster Filter Algorithm (LCFA)](https://www.star.nesdis.noaa.gov/goesr/documents/ATBDs/Baseline/ATBD_GOES-R_GLM_v3.0_Jul2012.pdf)**
 
@@ -100,7 +100,7 @@ Performs grouping of the ingested data by implementing K-Means clustering algori
 
 |<a href="./img/lightning-containers-dashboard.gif" align="center"><img src="./img/lightning-containers-dashboard.gif" alt="An example dashboard of flash event data points" width="600px"/></a>
 |:--:|
-|Lightning clustering map|
+|Lightning containers dashboard|
 
 ## Testing
 
@@ -118,8 +118,6 @@ This work would not have been possible without amazing open source software and 
 
 + GLM Dataset from NOAA NESDIS
 + Prefect from PrefectHQ
-+ Spark from Apache Foundation
-
-Built on the codebase of [Lightning Streams](https://github.com/BayoAdejare/lightning-streams).
++ Built on the codebase of [Lightning Streams](https://github.com/BayoAdejare/lightning-streams).
 
 Thank you to the authors of these software and datasets for making them available to the community!

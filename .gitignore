@@ -3,7 +3,7 @@
 *.csv
 *.crc
 *.parquet
-data/
+# data/
 # Database
 *.db
 *.db.wal
