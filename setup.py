@@ -19,6 +19,6 @@ setup(
         "plotly==5.18.0",
     ],
     author="Bayo Adejare",
-    author_email="bayo.adejare@gmail.com",
+    author_email="4624500+BayoAdejare@users.noreply.github.com",
     extras_requires={"dev": ["pytest==7.4.2"]},
 )
