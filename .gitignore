@@ -3,9 +3,9 @@
 *.csv
 *.crc
 *.parquet
-# data/
+data/
 # Database
-# *.db
+*.db
 *.db.wal
 checkpoint/
 spark-warehouse/
@@ -15,4 +15,4 @@ spark-warehouse/
 *.pyc
 *.egg-info/
 *.egg
-# .env
+.env
