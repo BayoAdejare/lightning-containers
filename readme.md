@@ -6,7 +6,7 @@
 
 </div>
 
-[![Open in Streamlit](streamlit.io)](streamlit.io)]
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lightning-containers.streamlit.app)
 
 ## Introduction 
 
