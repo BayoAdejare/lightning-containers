@@ -6,13 +6,13 @@
 
 </div>
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gerardrbentley-streamlit-state-guesser-streamlit-app-owl1sn.streamlit.app/)
+[![Open in Streamlit](streamlit.io)](streamlit.io)
 
 ## Introduction 
 
-This is a monolith Docker image to help you get started with geospatial analysis and visualization of lightning atmospheric data. The data comes from US **National Oceanic and Atmospheric Administration (NOAA)** [Geostationary Lightning Mapper (GLM) - Data Product](https://www.goes-r.gov/products/baseline-lightning-detection.html) sourced from AWS s3 buckets. There are currently two main processes:
-1. ETL Ingestion - data ingestion process.
-2. Dashboard Refresh - refresh data for dashboard app.
+This is a monolith Docker image to help you get started with geospatial analysis and visualization of lightning atmospheric data. The data comes from US **National Oceanic and Atmospheric Administration (NOAA)** [Geostationary Lightning Mapper (GLM) - Data Product](https://www.goes-r.gov/products/baseline-lightning-detection.html) sourced from AWS s3 buckets. There are currently two main component:
+1. ETL Ingestion - data ingestion and analysis processes.
+2. Streamlit dashboard app - frontend gis visualization dashboard.
 
 Processing done using Pandas dataframes, SQlite with Spatialite extension as the local storage and self-hosted Prefect server instance for orchestration and observability of the processing pipelines.
 
