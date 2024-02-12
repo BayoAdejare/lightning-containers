@@ -5,7 +5,7 @@
 *.parquet
 # data/
 # Database
-*.db
+# *.db
 *.db.wal
 checkpoint/
 spark-warehouse/
