@@ -57,7 +57,7 @@ def display_kpi_metrics(kpis: List[float], kpi_names: List[str]):
 def display_sidebar(data: pd.DataFrame) -> Tuple[List[str], List[str], List[str]]:
     st.sidebar.info(
         """
-        + [Wep Map](https://lightning-containers.streamlit.io)
+        + [Wep Map](https://lightning-containers.streamlit.app)
         + [GitHub Repo](https://github.com/bayoadejare/lightning-containers)
         """
     )
