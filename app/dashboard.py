@@ -36,7 +36,7 @@ def calculate_kpis(data: pd.DataFrame) -> List[float]:
     total_energy = data["energy"].sum()
     formatted_total_energy = f"{total_energy:.2}"
     total_events = data["energy"].count()
-    average_energy_per_event = f"{total_energy / total_events / 1000:.2}"
+    average_energy_per_event = f"{total_energy / total_events :.2}"
     unique_events = data["energy"].nunique()
     return [
         formatted_total_energy,
