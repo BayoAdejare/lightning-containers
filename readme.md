@@ -34,8 +34,8 @@ are clustered into flashes using LCFA.
 
 |Resource|Minimum|Recommended|
 |--------|-------|-----------|
-|CPU     |4 cores|4+ cores   |
-|RAM     |16GB   |32GB       |
+|CPU     |2 cores|4+ cores   |
+|RAM     |6GB    |16GB       |
 |Storage |8GB    |24GB       |
 
 ## Usage
