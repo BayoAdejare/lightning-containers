@@ -26,10 +26,7 @@ def db_connect(process: str):
 
     os.chdir(dest_folder)
     db_path = os.path.join(dest_folder, "glmFlash.db")
-    ############# BEGIN TEST
-    print(f"Db file: {db_path}")
 
-    ############# END TEST
     if process == "preprocess":
         # conn string for preprocess data
         conn = db.connect(db_path)
@@ -95,7 +92,7 @@ def Silhouette_evaluator(kmeans_cluster: pd.DataFrame):
     k_max = results["silhouette_coefficient"].argmax()
     print(f"Silhoutte coefficients: {results}")
     os.environ["NUM_OF_CLUSTERS"] = str(k_max)
-    # save evaluations db
+    # todo: save evaluations db
     return results
 
 
@@ -111,5 +108,5 @@ def elbow_evaluator(kmeans_cluster: pd.DataFrame):
     elb_sse = elb_evaluation(kmeans_cluster)
     results.append(elb_sse)
     print(f"Elbow SSE ...")
-    # save evaluations db
+    # todo: save evaluations db
     return results

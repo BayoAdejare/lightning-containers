@@ -49,7 +49,7 @@ def load_tbl(load_folder: str) -> pd.DataFrame:
     """
     )
 
-    conn.enable_load_extension(True)
+    # conn.enable_load_extension(True)
 
     # try:
     #     conn.execute("SELECT load_extension('mod_spatialite');")
@@ -68,4 +68,4 @@ def load_tbl(load_folder: str) -> pd.DataFrame:
     # cleanup
     shutil.rmtree("loaded")
 
-    return "DB load complete!"
+    return df
