@@ -83,7 +83,6 @@ def source():
         print(f"Dowloading {filename} to {os.path.join(extract_folder, filename)}")
         s3_extract = extract_s3(bucket_name, prefix, filename, filepath)
         results.append(s3_extract)
-    # context.add_output_metadata({s3_extract -> results})
     return results
 
 
