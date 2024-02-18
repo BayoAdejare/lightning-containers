@@ -1,6 +1,6 @@
 from prefect import flow
 from tasks import *
-from tasks.clustering import (
+from tasks.analytics import (
     preprocessor,
     kmeans_cluster,
     Silhouette_evaluator,
