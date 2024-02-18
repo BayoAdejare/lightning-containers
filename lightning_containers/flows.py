@@ -8,7 +8,7 @@ from tasks.clustering import (
 )
 
 start_date = "02/13/2023"
-end_date = "02/14/2023"
+end_date = "02/17/2023"
 
 
 # 24 hours :test:

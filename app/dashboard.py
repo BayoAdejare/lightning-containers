@@ -124,7 +124,7 @@ def display_tables(data: pd.DataFrame):
     with col2:
         st.subheader("Top 10 Energy by Location")
         top_energy = (
-            data.groupby(["latitude", "longitude"])["energy"]
+            data.groupby(["time", "latitude", "longitude"])["energy"]
             .sum()
             .reset_index()
             .sort_values("energy", ascending=False)
