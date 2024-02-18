@@ -14,10 +14,6 @@ start_date = str(dt)
 end_date = str(dt)
 hours = dt.strftime("%H")
 
-# 24 hours
-# hours = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
-#             "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
-
 
 def db_connect(process: str):
     basepath = Path(__file__).resolve().parent.parent.parent.parent
