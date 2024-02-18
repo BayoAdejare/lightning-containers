@@ -38,9 +38,10 @@ def load_tbl(load_folder: str) -> pd.DataFrame:
     CREATE VIEW IF NOT EXISTS vw_flash
     AS
     SELECT *, 
-        CASE WHEN h_time >= 9 AND h_time <= 17 
-                then 'Day'
-             WHEN h_time > 17 AND h_time <= 20 THEN 'Evening'
+        CASE WHEN h_time BETWEEN '09:00:00' AND '17:00:00'
+                THEN 'Day'
+             WHEN h_time BETWEEN '17:00:00' AND '20:00:00'
+                THEN 'Evening'
             ELSE 'Night' -- catch all
         END AS time_period,
         9 as cluster,
