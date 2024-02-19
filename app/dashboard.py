@@ -171,7 +171,7 @@ def main():
 
     col1, col2 = st.columns(2)
     with col1:
-        st.map(data=load_data(), color="#ffaa0088")
+        st.map(data=filtered_data, color="#ffaa0088")
 
     with col2:
         display_charts(filtered_data)
