@@ -2,4 +2,4 @@ deployments:
   schedule:
     cron: 0 * * * *
     timezone: America/New_York
-    active: false
+    active: true
