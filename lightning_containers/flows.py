@@ -8,7 +8,7 @@ from tasks.analytics import (
 )
 
 start_date = "02/13/2023"
-end_date = "02/17/2023"
+end_date = "02/19/2023"
 
 
 # 24 hours :test:
