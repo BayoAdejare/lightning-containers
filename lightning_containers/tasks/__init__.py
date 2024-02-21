@@ -22,6 +22,7 @@ def ingestion(start_date: str, end_date: str, hours: [str]):
     """Collects the data"""
 
     for single_date in pd.date_range(start_date, end_date, freq="D"):
+
         for single_hour in hours:
             single_hour = single_hour.rjust(2, "0")
             print(
