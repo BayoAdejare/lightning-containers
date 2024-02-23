@@ -2,7 +2,7 @@ import os
 import shutil
 import warnings
 
-from prefect import task
+from prefect import task, get_run_logger
 from datetime import datetime, timedelta
 from .extract import extract_s3
 from .transform import transform_file
@@ -62,12 +62,13 @@ def etl_config(process: str):
     retry_delay_seconds=3,
 )
 def source():
+    logger = get_run_logger()
     # config file string
     prefix, bucket_name, extract_folder = etl_config(process="extract")
     # navigate to folder
     os.chdir(extract_folder)
     results = []
-    print(f"Starting file extracts for: {prefix}")
+    logger.info(f"Starting file extracts for: {prefix}")
     # configure s3 no sign in credential
     s3 = client("s3", config=Config(signature_version=UNSIGNED))
     # list existing files in buckets
@@ -80,7 +81,9 @@ def source():
         # download file from list
         filepath = files["Key"]
         path, filename = os.path.split(filepath)
-        print(f"Dowloading {filename} to {os.path.join(extract_folder, filename)}")
+        logger.info(
+            f"Dowloading {filename} to {os.path.join(extract_folder, filename)}"
+        )
         s3_extract = extract_s3(bucket_name, prefix, filename, filepath)
         results.append(s3_extract)
     return results
