@@ -44,6 +44,39 @@ are clustered into flashes using LCFA.
 ```
 ## Project Structure 
 
+```
+lightning-containers/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── src/
+│   ├── flows.py
+│   └── tasks/
+├── docker/
+│   ├── Dockerfile
+│   └── docker-compose.yaml
+├── tests/
+│   └── test_clustering.py
+|   └── test_extract.py
+|   └── test_load.py
+|   └── test_transform.py
+├── app/
+|   └── dashboard.py
+├── docs/
+│   └── index.md
+├── notebooks/
+|   └── clustering/
+|   └── mapping/
+|   └── streaming/
+├── img/
+├── .streamlit/
+│   └── config.toml
+│   └── secrets.toml
+└── data/
+```
+
 ## Requirements
 
 |Resource|Minimum|Recommended|
@@ -54,15 +87,20 @@ are clustered into flashes using LCFA.
 
 ## Usage
 
-Can be ran with docker containers or installed locally.
+1. Clone the repository.
 
-`docker-compose up # spin up containers`
+`git clone https://github.com/BayoAdejare/lightning-containers.git`
+`cd lightning-containers`
+
+2. Can be ran with docker containers or installed locally.
+
+`docker-compose up -d # spin up containers`
 
 ### Installation
 
-First make sure, you have the requirements installed, this can be installed from the project directory via pip's setup command:
+For local install, make sure you have the virtual environments and requirements installed, this can be installed from the project directory via pip's setup command:
 
-`pip install . # =< python3.12 `
+`pip install -r requirements.txt # =< python3.12 `
 
 ### Start Flow
 
@@ -74,7 +112,7 @@ The prefect orchestration platform is required to start the scheduling, from the
 
 Run the command to start the data app. 
 
-`python lightning_containers/flows.py # Start backend`
+`python src/flows.py # Start backend`
 
 `streamlit run app/dashboard.py # Start frontend i.e. http://localhost:8501/`
 
