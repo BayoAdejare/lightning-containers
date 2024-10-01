@@ -46,14 +46,18 @@ are clustered into flashes using LCFA.
 
 ```
 lightning-containers/
-├── README.md
-├── LICENSE
-├── .gitignore
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
+|
 ├── src/
 │   ├── flows.py
 │   └── tasks/
+|       └── analytics/
+|       └── etl/
+├── app/
+|   └── dashboard.py
+├── notebooks/
+|   └── clustering/
+|   └── mapping/
+|   └── streaming/
 ├── docker/
 │   ├── Dockerfile
 │   └── docker-compose.yaml
@@ -62,19 +66,18 @@ lightning-containers/
 |   └── test_extract.py
 |   └── test_load.py
 |   └── test_transform.py
-├── app/
-|   └── dashboard.py
 ├── docs/
 │   └── index.md
-├── notebooks/
-|   └── clustering/
-|   └── mapping/
-|   └── streaming/
 ├── img/
 ├── .streamlit/
 │   └── config.toml
 │   └── secrets.toml
-└── data/
+├── data/
+├── .gitignore
+├── LICENSE
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+└── README.md
 ```
 
 ## Requirements
@@ -162,7 +165,7 @@ Use the following command to run tests:
 
 ## License
 
-[Apache 2.0 License](LICENSE)
+This project is licensed under the Apache 2.0 License - see the [Apache 2.0 License](LICENSE) file for details. 
 
 ## Acknowledgements
 
