@@ -8,6 +8,19 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lightning-containers.streamlit.app)
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [ETL Flow](#etl-flow)
+- [Clustering Flow](#clustering-flow)
+- [Dashboard Map](#dashboard-map)
+- [Testing](#testing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
 ## Introduction 
 
 This is a monolith Docker image to help you get started with geospatial analysis and visualization of lightning atmospheric data. The data comes from US **National Oceanic and Atmospheric Administration (NOAA)** [Geostationary Lightning Mapper (GLM) - Data Product](https://www.goes-r.gov/products/baseline-lightning-detection.html) sourced from AWS s3 buckets. There are currently two main component:
@@ -29,6 +42,7 @@ data including metadata with descriptors. In general, the main variables: flashe
 events form an hierarchy, i.e. a series of detected radiant events are clustered into groups and groups 
 are clustered into flashes using LCFA.
 ```
+## Project Structure 
 
 ## Requirements
 
