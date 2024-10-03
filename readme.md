@@ -13,7 +13,7 @@
 - [Introduction](#introduction)
 - [Project Structure](#project-structure)
 - [Requirements](#requirements)
-- [Usage](#usage)
+- [Installation](#installation)
 - [ETL Flow](#etl-flow)
 - [Clustering Flow](#clustering-flow)
 - [Dashboard Map](#dashboard-map)
@@ -88,20 +88,24 @@ lightning-containers/
 |RAM     |6GB    |16GB       |
 |Storage |8GB    |24GB       |
 
-## Usage
+## Installation
+
+### Docker Container
 
 1. Clone the repository.
 
-`git clone https://github.com/BayoAdejare/lightning-containers.git`
-`cd lightning-containers`
+```
+git clone https://github.com/BayoAdejare/lightning-containers.git
+cd lightning-containers
+```
 
 2. Can be ran with docker containers or installed locally.
 
 `docker-compose up -d # spin up containers`
 
-### Installation
+### Local install
 
-For local install, make sure you have the virtual environments and requirements installed, this can be installed from the project directory via pip's setup command:
+Make sure you have the virtual environments and requirements installed, this can be installed from the project directory via pip's setup command:
 
 `pip install -r requirements.txt # =< python3.12 `
 
