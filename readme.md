@@ -101,7 +101,10 @@ cd lightning-containers
 
 2. Can be ran with docker containers or installed locally.
 
-`docker-compose up -d # spin up containers`
+```
+cd docker
+docker-compose up -d # spin up containers
+```
 
 ### Local install
 
