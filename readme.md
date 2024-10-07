@@ -194,6 +194,10 @@ This project uses GitHub Actions for CI/CD. The workflow is defined in the `.git
 - Data quality checks on scheduled intervals
 - Deployment of updated ml models and Spark jobs to production
 
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [Apache 2.0 License](LICENSE) file for details. 
