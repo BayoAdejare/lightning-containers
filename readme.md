@@ -185,7 +185,7 @@ Use the following command to run tests:
 
 ## CI/CD
 
-This project uses GitHub Actions for CI/CD. The workflow is defined in the `.github/workflows/main.yml` file. This includes:
+This project uses GitHub Actions for CI/CD. The workflow is defined in the `.github/workflows/docker-image.yml` file. This includes:
 
 - Automated testing on pull requests
 - Data quality checks on scheduled intervals
