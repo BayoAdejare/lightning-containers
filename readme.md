@@ -58,9 +58,6 @@ lightning-containers/
 |   └── clustering/
 |   └── mapping/
 |   └── streaming/
-├── docker/
-│   ├── Dockerfile
-│   └── docker-compose.yaml
 ├── tests/
 │   └── test_clustering.py
 |   └── test_extract.py
@@ -77,6 +74,8 @@ lightning-containers/
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
+├── Dockerfile
+├── docker-compose.yml
 └── README.md
 ```
 
@@ -102,13 +101,19 @@ cd lightning-containers
 2. Can be ran with docker containers or installed locally.
 
 ```
-cd docker
 docker-compose up -d # spin up containers
 ```
 
 ### Local install
 
-Make sure you have the virtual environments and requirements installed, this can be installed from the project directory via pip's setup command:
+Make sure you have the virtual environment configured:
+
+```
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
+
+For requirements, this can be installed from the project directory via pip's setup command:
 
 `pip install -r requirements.txt # =< python3.12 `
 
