@@ -6,9 +6,12 @@
 
 </div>
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lightning-containers.streamlit.app)
+<div align="center">
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lightning-containers.streamlit.app)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bayoadejare/lightning-containers/docker-image.yml)
+![GitHub License](https://img.shields.io/github/license/BayoAdejare/lightning-containers)
+</div>
 
 ## Table of Contents
 
