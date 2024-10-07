@@ -6,7 +6,7 @@ setup(
     packages=find_packages(exclude=["lightning_containers_tests"]),
     install_requires=[
         ## backend dependencies
-        "prefect==2.14.21",
+        "prefect==2.20.9",
         "netCDF4==1.6.5",
         "pandas==2.0",
         "boto3==1.28.44",
