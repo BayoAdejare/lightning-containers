@@ -25,6 +25,7 @@
 - [Clustering Flow](#clustering-flow)
 - [Dashboard Map](#dashboard-map)
 - [Testing](#testing)
+- [CI/CD](#cicd)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
@@ -182,6 +183,14 @@ Use the following command to run tests:
 
 `pytest`
 
+## CI/CD
+
+This project uses GitHub Actions for CI/CD. The workflow is defined in the `.github/workflows/main.yml` file. This includes:
+
+- Automated testing on pull requests
+- Data quality checks on scheduled intervals
+- Deployment of updated ml models and Spark jobs to production
+
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [Apache 2.0 License](LICENSE) file for details. 
@@ -190,8 +199,9 @@ This project is licensed under the Apache 2.0 License - see the [Apache 2.0 Lice
 
 This work would not have been possible without amazing open source software and datasets, including but not limited to:
 
-+ GLM Dataset from NOAA NESDIS
-+ Prefect from PrefectHQ
++ [GLM Dataset from NOAA NESDIS](https://www.star.nesdis.noaa.gov/goesr/documents/ATBDs/Baseline/ATBD_GOES-R_GLM_v3.0_Jul2012.pdf)
++ [Prefect from PrefectHQ](https://docs.prefect.io/api-ref/prefect/)
++ [Streamlit](https://docs.streamlit.io/)
 + Built on the codebase of [Lightning Streams](https://github.com/BayoAdejare/lightning-streams).
 
 Thank you to the authors of these software and datasets for making them available to the community!
