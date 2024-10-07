@@ -77,6 +77,9 @@ lightning-containers/
 ├── .streamlit/
 │   └── config.toml
 │   └── secrets.toml
+├── .github/
+│   └── workflows/
+│       └── docker-image.yml
 ├── data/
 ├── .gitignore
 ├── LICENSE
@@ -97,7 +100,7 @@ lightning-containers/
 
 ## Installation
 
-### Docker Container
+### Quick Start: Docker Container
 
 1. Clone the repository.
 
