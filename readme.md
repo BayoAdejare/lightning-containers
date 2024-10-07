@@ -8,6 +8,8 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lightning-containers.streamlit.app)
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bayoadejare/lightning-containers/docker-image.yml)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
