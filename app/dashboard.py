@@ -80,7 +80,7 @@ def display_sidebar(data: pd.DataFrame) -> Tuple[List[str], List[str], List[str]
     st.sidebar.info(
         """
         Bayo Adejare: 
-        [Blog](https://bayoadejare.medium.com) | [GitHub](https://github.com/bayoadejare) | [Twitter](https://twitter.com/bayoadejare) | [LinkedIn](https://www.linkedin.com/in/bayo-adejare)
+        [Blog](https://bayoadejare.medium.com) | [GitHub](https://github.com/bayoadejare) | [X](https://x.com/bayoadejare) | [LinkedIn](https://www.linkedin.com/in/bayo-adejare)
         """
     )
 
