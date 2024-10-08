@@ -17,7 +17,7 @@ setup(
         "numpy==1.26.3",  # Add numpy with a specific version
         "scipy==1.11.4",
         "pandas==2.0.3",
-        "scikit-learn==1.3.0",
+        "scikit-learn==1.5.0",
         # frontend dependencies
         "streamlit==1.37.0",
         "plotly==5.18.0",
