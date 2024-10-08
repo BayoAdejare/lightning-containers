@@ -196,7 +196,7 @@ This project uses GitHub Actions for CI/CD. The workflow is defined in the `.git
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our contributing guidelines and the process for submitting pull requests.
 
 ## License
 
