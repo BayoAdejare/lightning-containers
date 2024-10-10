@@ -7,8 +7,8 @@ from tasks.analytics import (
     elbow_evaluator,
 )
 
-start_date = "10/01/2024"
-end_date = "10/03/2024"
+start_date = "10/08/2024"
+end_date = "10/10/2024"
 
 
 # 24 hours :test:
