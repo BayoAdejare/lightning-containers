@@ -151,7 +151,7 @@ def main():
 
     data = load_data()
 
-    st.title("⚡Lightning Containers Dashboard")
+    # st.title("⚡Lightning Containers Dashboard")
 
     selected_states, selected_time_period = display_sidebar(data)
 
@@ -169,12 +169,16 @@ def main():
 
     display_kpi_metrics(kpis, kpi_names)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.map(data=filtered_data, color="#ffaa0088")
+    display_charts(filtered_data)
 
-    with col2:
-        display_charts(filtered_data)
+    st.map(data=filtered_data, color="#ffaa0088")
+
+    # col1, col2 = st.columns(2)
+    # with col1:
+    #     st.map(data=filtered_data, color="#ffaa0088")
+
+    # with col2:
+    #     display_charts(filtered_data)
 
     # display_tables(filtered_data)
 
