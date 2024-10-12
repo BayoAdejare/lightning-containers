@@ -176,9 +176,14 @@ Performs grouping of the ingested data by implementing K-Means clustering algori
 
 ## Dashboard Map
 
+
+<p align="center">
+
 |<a href="./img/lightning-containers-dashboard.gif" align="center"><img src="./img/lightning-containers-dashboard.gif" alt="An example dashboard of flash event data points" width="600px"/></a>
 |:--:|
 |Lightning containers dashboard|
+
+</p>
 
 ## Testing
 
