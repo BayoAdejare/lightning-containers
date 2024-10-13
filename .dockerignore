@@ -1,7 +1,9 @@
 .git
+.gitignore
 .idea
 *.pyc
 __pycache__
 venv/
 .vscode
 *.zip
+.env
