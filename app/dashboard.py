@@ -1,3 +1,4 @@
+# import folium
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -47,9 +48,10 @@ def calculate_kpis(data: pd.DataFrame) -> List[float]:
 
 
 def display_kpi_metrics(kpis: List[float], kpi_names: List[str]):
-    st.header("Flash Events")
+    st.header("Flashes ⚡")
+    st.divider()  # 👈 Draws a horizontal rule
     for i, (col, (kpi_name, kpi_value)) in enumerate(
-        zip(st.columns(4), zip(kpi_names, kpis))
+        zip(st.columns(3), zip(kpi_names, kpis))
     ):
         col.metric(label=kpi_name, value=kpi_value)
 
@@ -94,8 +96,8 @@ def display_charts(data: pd.DataFrame):
         x="date_time",
         y="energy",
         title="Radiance Energy Over Time",
-        width=900,
-        height=500,
+        width=800,
+        height=300,
     )
 
     fig.update_layout(margin=dict(l=20, r=20, t=50, b=20))
@@ -170,6 +172,10 @@ def main():
     display_kpi_metrics(kpis, kpi_names)
 
     display_charts(filtered_data)
+
+    # Create a Folium map
+ 
+    # Display the map in Streamlit
 
     st.map(data=filtered_data, color="#ffaa0088")
 
