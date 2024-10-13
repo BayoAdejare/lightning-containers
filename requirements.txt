@@ -14,3 +14,4 @@ scikit-learn==1.5.0
 ## frontend dependencies
 streamlit==1.37.0
 plotly==5.18.0
+# folium==0.17.0

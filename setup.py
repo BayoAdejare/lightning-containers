@@ -21,6 +21,7 @@ setup(
         # frontend dependencies
         "streamlit==1.37.0",
         "plotly==5.18.0",
+        # "folium==0.17.0",
     ],
     author="Bayo Adejare",
     author_email="4624500+BayoAdejare@users.noreply.github.com",
