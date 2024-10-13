@@ -53,7 +53,7 @@ def display_kpi_metrics(kpis: List[float], kpi_names: List[str]):
     for i, (col, (kpi_name, kpi_value)) in enumerate(
         zip(st.columns(3), zip(kpi_names, kpis))
     ):
-        col.metric(label=kpi_name, value=kpi_value)
+        col.metric(label=kpi_name, value=kpi_value, delta="+10%")
 
 
 def display_sidebar(data: pd.DataFrame) -> Tuple[List[str], List[str], List[str]]:
