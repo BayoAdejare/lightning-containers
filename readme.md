@@ -8,10 +8,21 @@
 
 <div align="center">
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lightning-containers.streamlit.app)
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bayoadejare/lightning-containers/docker-image.yml)](https://github.com/BayoAdejare/lightning-containers/actions)
-[![GitHub License](https://img.shields.io/github/license/BayoAdejare/lightning-containers)](https://github.com/BayoAdejare/lightning-containers/blob/main/LICENSE)
+  <a target="_blank" href="https://lightning-containers.streamlit.app" style="background:none">
+    <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg?labelColor=FFAC33&color=2596BE&logo=streamlit" />
+  </a>
 
+  <a target="_blank" href="https://github.com/BayoAdejare/lightning-containers/actions" style="background:none">
+    <img src="https://img.shields.io/github/actions/workflow/status/bayoadejare/lightning-containers/docker-image.yml?labelColor=FFAC33&color=2596BE&logo=actions" />
+  </a>
+
+  <a target="_blank" href="https://github.com/BayoAdejare/lightning-containers/blob/main/LICENSE" style="background:none">
+    <img src="https://img.shields.io/github/license/BayoAdejare/lightning-containers?labelColor=FFAC33&color=2596BE&logo=license" />
+  </a>
+
+  <a target="_blank" href="https://github.com/BayoAdejare/lightning-containers" style="background:none">
+    <img src="https://img.shields.io/github/stars/BayoAdejare/lightning-containers?labelColor=FFAC33&color=2596BE&logo=github">
+  </a>
 </div>
 
 
