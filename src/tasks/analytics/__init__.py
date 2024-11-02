@@ -81,7 +81,7 @@ def kmeans_cluster(preprocessor: pd.DataFrame):
     retries=3,
     retry_delay_seconds=15,
 )
-def Silhouette_evaluator(kmeans_cluster: pd.DataFrame):
+def silhouette_evaluator(kmeans_cluster: pd.DataFrame):
     print(f"Starting silhouette evaluation ...")
     sil_coefficients = sil_evaluation(kmeans_cluster)
     results = sil_coefficients.set_index("k", drop=True)
