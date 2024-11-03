@@ -25,5 +25,5 @@ setup(
     ],
     author="Bayo Adejare",
     author_email="4624500+BayoAdejare@users.noreply.github.com",
-    extras_require={"dev": ["pytest==7.4.2"]},
+    extras_require={"dev": ["pytest==7.4.2", "pydantic>=1.8.0", "pyarrow>=6.0.0"]},
 )
