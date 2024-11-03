@@ -14,3 +14,6 @@ scikit-learn==1.5.0
 streamlit==1.37.0
 plotly==5.18.0
 # folium==0.17.0
+
+## extras
+pytest==7.4.2
