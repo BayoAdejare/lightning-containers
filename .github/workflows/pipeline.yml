@@ -1,0 +1,49 @@
+name: Pipeline CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Setup directory structure
+      run: |
+        mkdir -p data/Load data/Processed
+        chmod -R 777 data  # Ensure write permissions
+    
+    - name: Run tests
+      run: |
+        pytest tests/
+      env:
+        DATA_DIR: ${{ github.workspace }}/data
+    
+    - name: Run pipeline
+      run: |
+        python main.py
+      env:
+        DATA_DIR: ${{ github.workspace }}/data
+
+    - name: Archive data artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: pipeline-data
+        path: data/
+        retention-days: 5
