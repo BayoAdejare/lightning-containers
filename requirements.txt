@@ -17,3 +17,5 @@ plotly==5.18.0
 
 ## extras
 pytest==7.4.2
+pydantic>=1.8.0
+pyarrow>=6.0.0
