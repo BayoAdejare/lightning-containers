@@ -8,7 +8,7 @@ setup(
         "importlib_metadata>=4.6.0",
         "setuptools>=75.1.0",
         ## backend dependencies
-        "prefect==2.20.9",
+        "prefect==2.20.17",
         "netCDF4==1.6.5",
         "boto3==1.28.44",
         "botocore==1.31.44",
