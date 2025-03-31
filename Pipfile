@@ -4,14 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-streamlit==1.37.0
-plotly==5.18.0
-streamlit-folium==0.24.0
-
-pandas==2.2.3
-pydantic==2.11.1
+streamlit = "==1.37.0"
+plotly = "==5.18.0"
+streamlit-folium = "==0.24.0"
+pandas = "==2.2.3"
+pydantic = "==2.11.1"
 
 [dev-packages]
 
 [requires]
-python_version = "3.13"
+python_version = "3.12"
