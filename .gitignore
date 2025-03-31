@@ -1,9 +1,10 @@
 # Data files
 *.nc
+*.nc.*
 *.csv
 *.crc
 *.parquet
-data/
+# data/
 # Database
 # *.db
 *.db.wal
