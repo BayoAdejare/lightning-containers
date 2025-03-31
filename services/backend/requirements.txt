@@ -1,0 +1,26 @@
+# Core dependencies
+prefect==3.2.15
+pendulum==3.0.0
+pandas==2.2.3
+numpy==2.2.4
+pyarrow==19.0.1
+netCDF4==1.7.2
+
+# AWS integrations
+boto3==1.28.44
+botocore==1.31.44
+
+# Database
+SQLAlchemy==2.0.30
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+
+# Utilities
+tqdm==4.66.3
+scikit-learn==1.5.0
+
+# Type validation
+pydantic==2.11.1  # Required for Prefect 3.x compatibility
+
+# Prefect extras (replaces separate package installs)
+prefect-aws==0.5.8

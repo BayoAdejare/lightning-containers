@@ -1,7 +1,9 @@
 <div align="center">
  <h1>⚡Lightning Containers: docker-powered lightning atmospheric dataset 📈</h1>
     <p align="center">
-        <a href='https://ko-fi.com/bayoadejare' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+      <a target="_blank" href="https://ko-fi.com/bayoadejare" style="background:none">
+      <img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" />
+      </a>
     </p>
 
 </div>
@@ -42,7 +44,7 @@
 
 ## Introduction 
 
-This is a monolith Docker image to help you get started with geospatial analysis and visualization of lightning atmospheric data. The data comes from US **National Oceanic and Atmospheric Administration (NOAA)** [Geostationary Lightning Mapper (GLM) - Data Product](https://www.goes-r.gov/products/baseline-lightning-detection.html) sourced from AWS s3 buckets. There are currently two main component:
+This is a starter for geospatial analysis and visualization of lightning atmospheric data. The data comes from US **National Oceanic and Atmospheric Administration (NOAA)** [Geostationary Lightning Mapper (GLM) - Data Product](https://www.goes-r.gov/products/baseline-lightning-detection.html) sourced from AWS s3 buckets. There are currently two main component:
 1. ETL Ingestion - data ingestion and analysis processes.
 2. Streamlit dashboard app - frontend gis visualization dashboard.
 
@@ -65,39 +67,48 @@ are clustered into flashes using LCFA.
 
 ```
 lightning-containers/
-|
+├── services/
+│   ├── frontend/
+│   │   ├── Dockerfile
+│   │   └── requirements.txt
+│   └── backend/
+│       ├── Dockerfile
+│       └── requirements.txt
 ├── src/
 │   ├── flows.py
 │   └── tasks/
-|       └── analytics/
-|       └── etl/
+│       ├── analytics/
+│       └── etl/
 ├── app/
-|   └── dashboard.py
+│   └── dashboard.py
 ├── notebooks/
-|   └── clustering/
-|   └── mapping/
-|   └── streaming/
+│   ├── clustering/
+│   ├── mapping/
+│   └── streaming/
 ├── tests/
-│   └── test_clustering.py
-|   └── test_extract.py
-|   └── test_load.py
-|   └── test_transform.py
+│   ├── test_clustering.py
+│   ├── test_extract.py
+│   ├── test_load.py
+│   └── test_transform.py
 ├── docs/
 │   └── index.md
 ├── img/
 ├── .streamlit/
-│   └── config.toml
+│   ├── config.toml
 │   └── secrets.toml
 ├── .github/
 │   └── workflows/
 │       └── docker-image.yml
 ├── data/
+│   ├── Load/
+│   ├── Processed/
+│   └── Analytics/
+├── docker-compose.yml
+├── .dockerignore
 ├── .gitignore
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
-├── Dockerfile
-├── docker-compose.yml
 └── README.md
 ```
 
@@ -123,7 +134,7 @@ cd lightning-containers
 2. Can be ran with docker containers or installed locally.
 
 ```
-docker-compose up -d # spin up containers
+docker compose up # docker-compose up -d # spin up containers
 ```
 
 ### Local install
@@ -136,10 +147,21 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 
 For requirements, this can be installed from the project directory via pip's setup command:
+```
+# Backend only
+pip install -r services/backend/requirements.txt
 
-`pip install -r requirements.txt # =< python3.12 `
+# Frontend only (streamlit app)
+pip install -r services/frontend/requirements.txt
+```
 
 ### Start Flow
+
+Install the PogreSQL DB for prefect workflows: 
+```
+chmod +x scripts/setup_db.sh
+./scripts/setup_db.sh
+```
 
 Run the command to start the prefect workflow orchestration: 
 
@@ -147,6 +169,17 @@ Run the command to start the prefect workflow orchestration:
 
 The prefect orchestration platform is required to start the scheduling, from the prefect ui, you can run and monitor the data flows.
 
+To configure worker pools: 
+```
+# Set API URL
+export PREFECT_API_URL="http://127.0.0.1:4200/api"
+
+# Create dedicated work pool
+prefect work-pool create --type process "lightning-pool"
+
+# Start worker with 4 concurrent slots
+prefect worker start --pool "lightning-pool" --limit 4
+```
 Run the command to start the data app. 
 
 `python src/flows.py # Start backend`

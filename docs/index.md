@@ -47,7 +47,7 @@ git clone https://github.com/BayoAdejare/lightning-containers.git
 cd lightning-containers
 
 # Start containers
-docker-compose up -d
+docker compose up
 ```
 
 ### Local Installation
