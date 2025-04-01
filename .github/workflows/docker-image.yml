@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME || 'my-image-name' }}
+  IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME || '<your-dockerhub-username>/my-image-name' }}
 
 jobs:
   build-and-push:
@@ -22,7 +22,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Log in to Docker Registry
+    - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
@@ -36,6 +36,7 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
           type=sha
+          type=semver,pattern={{version}}
           type=ref,event=branch
 
     - name: Set up Docker Buildx
