@@ -3,7 +3,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from datetime import datetime
-from lightning_streams.assets.etl import transform
+from src.tasks import transformations
 import logging
 
 # Configure logging
@@ -41,7 +41,7 @@ def test_clean_timestamp(raw_data, caplog):
     """Test datetime parsing with error handling"""
     caplog.set_level(logging.WARNING)
     
-    result = transform.clean_timestamp(raw_data.copy())
+    result = transformations.clean_timestamp(raw_data.copy())
     
     # Validate datetimes
     assert pd.api.types.is_datetime64_any_dtype(result['timestamp'])
@@ -58,7 +58,7 @@ def test_convert_numeric(raw_data, caplog):
     """Test numeric conversion with error logging"""
     caplog.set_level(logging.WARNING)
     
-    result = transform.convert_numeric(raw_data.copy(), 'value')
+    result = transformations.convert_numeric(raw_data.copy(), 'value')
     
     # Validate numeric type
     assert pd.api.types.is_float_dtype(result['value'])
@@ -69,7 +69,7 @@ def test_convert_numeric(raw_data, caplog):
 
 def test_encode_boolean(raw_data):
     """Test boolean encoding from various string inputs"""
-    result = transform.encode_boolean(raw_data.copy(), 'is_active')
+    result = transformations.encode_boolean(raw_data.copy(), 'is_active')
     
     # Validate boolean type
     assert pd.api.types.is_bool_dtype(result['is_active'])
@@ -96,10 +96,10 @@ def test_validate_schema(cleaned_data):
 def test_handle_nulls(raw_data):
     """Test null handling strategies"""
     # Test different null handling methods
-    result_drop = transform.handle_nulls(raw_data.copy(), strategy='drop')
+    result_drop = transformations.handle_nulls(raw_data.copy(), strategy='drop')
     assert len(result_drop) == 2
     
-    result_fill = transform.handle_nulls(
+    result_fill = transformations.handle_nulls(
         raw_data.copy(), 
         strategy='fill',
         fill_values={'category': 'Unknown'}
@@ -109,7 +109,7 @@ def test_handle_nulls(raw_data):
 
 def test_aggregation_transforms(cleaned_data):
     """Test aggregation and feature engineering"""
-    result = transform.add_aggregate_features(cleaned_data.copy())
+    result = transformations.add_aggregate_features(cleaned_data.copy())
     
     # Check new features
     assert 'hour_of_day' in result.columns
@@ -124,16 +124,16 @@ def test_error_handling(raw_data):
     """Test error conditions and exception raising"""
     # Test invalid strategy
     with pytest.raises(ValueError):
-        transform.handle_nulls(raw_data.copy(), strategy='invalid')
+        transformations.handle_nulls(raw_data.copy(), strategy='invalid')
     
     # Test missing column
     with pytest.raises(KeyError):
-        transform.convert_numeric(raw_data.copy(), 'missing_column')
+        transformations.convert_numeric(raw_data.copy(), 'missing_column')
 
 def test_idempotency(cleaned_data):
     """Test transform is idempotent when reapplied"""
-    first_pass = transform.apply_full_pipeline(cleaned_data.copy())
-    second_pass = transform.apply_full_pipeline(first_pass)
+    first_pass = transformations.apply_full_pipeline(cleaned_data.copy())
+    second_pass = transformations.apply_full_pipeline(first_pass)
     
     pd.testing.assert_frame_equal(first_pass, second_pass)
 
@@ -146,7 +146,7 @@ def test_idempotency(cleaned_data):
 def test_custom_parser(input_val, expected, caplog):
     """Test custom value parser with parameterized inputs"""
     caplog.set_level(logging.DEBUG)
-    result = transform.parse_custom_value(input_val)
+    result = transformations.parse_custom_value(input_val)
     
     if np.isnan(expected):
         assert np.isnan(result)
