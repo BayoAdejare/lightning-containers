@@ -23,6 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r services/backend/requirements.txt
         pip install -r services/frontend/requirements.txt
+        pip install pytest
     
     - name: Setup directory structure
       run: |

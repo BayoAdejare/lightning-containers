@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pytest
 from unittest.mock import patch, MagicMock
-from lightning_streams.assets.etl import load
+from src.tasks import sink
 import pandas as pd
 import boto3
 from moto import mock_s3
@@ -47,7 +47,7 @@ def test_load_s3_success(s3_test_env, caplog):
     """Test successful S3 load operation"""
     caplog.set_level(logging.INFO)
     
-    result = load.load_to_s3(
+    result = sink.load_to_s3(
         data=s3_test_env["test_df"],
         bucket=s3_test_env["bucket"],
         s3_key=s3_test_env["test_path"],
@@ -76,7 +76,7 @@ def test_load_local_filesystem(local_fs_env):
         "output/data_20230101.csv"
     )
     
-    load.load_to_fs(
+    sink.load_to_fs(
         data=local_fs_env["test_data"],
         path=test_path,
         format="csv"
@@ -95,7 +95,7 @@ def test_load_s3_invalid_credentials(s3_test_env):
         mock_client.side_effect = Exception("AWS Credentials Error")
         
         with pytest.raises(Exception) as excinfo:
-            load.load_to_s3(
+            sink.load_to_s3(
                 data=s3_test_env["test_df"],
                 bucket=s3_test_env["bucket"],
                 s3_key="invalid/path.parquet"
@@ -106,7 +106,7 @@ def test_load_s3_invalid_credentials(s3_test_env):
 def test_load_file_format_validation(s3_test_env):
     """Test unsupported file format handling"""
     with pytest.raises(ValueError) as excinfo:
-        load.load_to_s3(
+        sink.load_to_s3(
             data=s3_test_env["test_df"],
             bucket=s3_test_env["bucket"],
             s3_key="data.unsupported",
@@ -120,7 +120,7 @@ def test_load_data_integrity(s3_test_env):
     test_key = "integrity_check.parquet"
     
     # Load and retrieve data
-    load.load_to_s3(
+    sink.load_to_s3(
         data=s3_test_env["test_df"],
         bucket=s3_test_env["bucket"],
         s3_key=test_key
@@ -141,7 +141,7 @@ def test_load_data_integrity(s3_test_env):
 def test_load_overwrite_protection(s3_test_env, caplog):
     """Test overwrite protection mechanism"""
     # Initial load
-    load.load_to_s3(
+    sink.load_to_s3(
         data=s3_test_env["test_df"],
         bucket=s3_test_env["bucket"],
         s3_key="existing_file.parquet"
@@ -149,7 +149,7 @@ def test_load_overwrite_protection(s3_test_env, caplog):
     
     # Attempt overwrite without permission
     with pytest.raises(FileExistsError):
-        load.load_to_s3(
+        sink.load_to_s3(
             data=s3_test_env["test_df"],
             bucket=s3_test_env["bucket"],
             s3_key="existing_file.parquet",
@@ -168,7 +168,7 @@ def test_production_s3_load():
     """Integration test with real S3 (run with pytest -m integration)"""
     test_df = pd.DataFrame({"test": [1, 2, 3]})
     
-    result = load.load_to_s3(
+    result = sink.load_to_s3(
         data=test_df,
         bucket="production-bucket",
         s3_key="integration_test.parquet",

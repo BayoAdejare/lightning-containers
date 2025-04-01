@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pytest
 from unittest.mock import patch, MagicMock
-from lightning_streams.assets.etl import extract
+from src.tasks import extract
 import pandas as pd
 import boto3
 from moto import mock_s3
