@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pytest
 from unittest.mock import patch, MagicMock
-from src.tasks import sink
+from src.flows import sink
 import pandas as pd
 import boto3
 from moto import mock_s3
