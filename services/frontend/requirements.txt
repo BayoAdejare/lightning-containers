@@ -5,4 +5,4 @@ streamlit-folium==0.24.0
 # Shared dependencies with backend
 pandas==2.2.3
 pydantic==2.11.1
-# SQLAlchemy = "==2.0.30"
+SQLAlchemy==2.0.30
