@@ -10,6 +10,7 @@
 *.db.wal
 checkpoint/
 spark-warehouse/
+venv/
 # packaging
 **build
 **__pycache__
