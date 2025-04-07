@@ -351,7 +351,7 @@ def create_sidebar_filters(data: pd.DataFrame) -> Dict[str, Any]:
     
     # State filter
     states = sorted(data["state"].unique())
-    selected_states = st.sidebar.multiselect("States", states, default=states[:3])
+    selected_states = st.sidebar.multiselect("States", states, default=[])
     
     # Time period filter
     time_periods = sorted(data["time_period"].unique())
