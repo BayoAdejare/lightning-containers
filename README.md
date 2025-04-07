@@ -142,7 +142,7 @@ docker compose up # docker-compose up -d # spin up containers
 Make sure you have the virtual environment configured:
 
 ```
-python -m venv venv
+python3.12 -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 

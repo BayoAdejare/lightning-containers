@@ -1,7 +1,6 @@
 #!/bin/bash
 # scripts/setup_db.sh
 # PostgreSQL + Prefect Database Migration Script
-
 set -eo pipefail
 
 # Configuration
@@ -29,10 +28,18 @@ case $PKG_MANAGER in
     "apt")
         sudo apt update
         sudo apt install -y postgresql postgresql-contrib libpq-dev
+        # PostgreSQL is automatically initialized on Ubuntu/Debian
         ;;
     "dnf"|"yum")
         sudo $PKG_MANAGER install -y postgresql-server postgresql-contrib
-        sudo postgresql-setup --initdb
+        
+        # Fix: Check if data directory exists and is not empty
+        if [ -d "/var/lib/pgsql/data" ] && [ "$(ls -A /var/lib/pgsql/data)" ]; then
+            echo "Data directory already exists. Skipping initialization."
+        else
+            echo "Initializing PostgreSQL database..."
+            sudo postgresql-setup --initdb
+        fi
         ;;
 esac
 
