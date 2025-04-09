@@ -361,7 +361,7 @@ def create_sidebar_filters(data: pd.DataFrame) -> Dict[str, Any]:
         if data.empty:
             default_end = datetime.now().date()
         else:
-            default_end = data["timestamp"].max().tz_localize(None) + pd.Timedelta(days=7)
+            default_end = data["timestamp"].max().tz_localize(None) + pd.Timedelta(days=3)
         
         # Convert to timezone-aware datetime
         selected_end = st.date_input("End date", value=default_end)
