@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
 from typing import List, Tuple, Dict, Any, Optional
-import json
 from streamlit_folium import st_folium
 import folium
 from folium.plugins import HeatMap, MarkerCluster
@@ -145,15 +144,22 @@ def load_data() -> pd.DataFrame:
     """Load data from the database"""
     try:
         conn = st.connection("flash_db", type="sql")
-        data = conn.query("SELECT * FROM vw_flash LIMIT 100000;")
+        data = conn.query("SELECT * FROM vw_flash ORDER BY timestamp DESC;")
 
         if data.empty:
             st.error("No data found in database")
             return pd.DataFrame()
         
-        # Convert
-        data["timestamp"] = pd.to_datetime(data["timestamp"], format='mixed')
+        # Convert with timezone awareness
+        data["timestamp"] = pd.to_datetime(data["timestamp"], utc=True, errors='coerce')
         
+        # Remove invalid timestamps
+        data = data[data["timestamp"].notna()]
+        
+        # Verify timezone info
+        if data["timestamp"].dt.tz is None:
+            data["timestamp"] = data["timestamp"].dt.tz_localize('UTC')
+
         # Convert categorical columns
         categorical_cols = ['cluster', 'state', 'time_period']
         for col in categorical_cols:
@@ -176,19 +182,17 @@ def filter_data(data: pd.DataFrame, filters: Dict[str, Any]) -> pd.DataFrame:
     """Apply multiple filters to the data"""
     filtered_data = data.copy()
     
-    # Handle empty data scenario 
     if filtered_data.empty:
         return filtered_data
 
-    # Convert filter values to strings to match cleaned data
-    str_filters = ['states', 'time_periods', 'clusters']
-    for key in str_filters:
-        filters[key] = [str(f).upper() if key == 'states' else str(f) for f in filters[key]]
+    # Convert filter dates to UTC to match data timezone
+    start_date = pd.to_datetime(filters["start_date"]).tz_convert('UTC')
+    end_date = pd.to_datetime(filters["end_date"]).tz_convert('UTC')
 
     # Date range filter
     filtered_data = filtered_data[
-        (filtered_data["timestamp"] >= filters["start_date"]) &
-        (filtered_data["timestamp"] <= filters["end_date"])
+        (filtered_data["timestamp"] >= start_date) &
+        (filtered_data["timestamp"] <= end_date)
     ]
     
     # State filter
@@ -324,6 +328,7 @@ def display_kpi_metrics(kpis: Dict[str, Any], theme: Dict[str, str]):
             delta_color="normal",
         )
 
+
 def create_sidebar_filters(data: pd.DataFrame) -> Dict[str, Any]:
     """Create sidebar filters and return selected filter values"""
     st.sidebar.title("⚡ Lightning Analytics")
@@ -338,17 +343,30 @@ def create_sidebar_filters(data: pd.DataFrame) -> Dict[str, Any]:
     st.sidebar.markdown("---")
     st.sidebar.header("Data Filters")
     
-    # Date range filter
+    # Date range filter - Modified to handle timezones
     date_col1, date_col2 = st.sidebar.columns(2)
     with date_col1:
-        start_date = pd.Timestamp(
-            st.date_input("Start date", data["timestamp"].min().date())
-        )
+        # Get default start date
+        if data.empty:
+            default_start = datetime.now().date()
+        else:
+            default_start = data["timestamp"].dt.tz_localize(None).min().date()
+
+        # Convert to timezone-aware datetime
+        selected_start = st.date_input("Start date", value=default_start)
+        start_date = pd.to_datetime(selected_start).tz_localize('UTC')  # Add UTC timezone
+
     with date_col2:
-        end_date = pd.Timestamp(
-            st.date_input("End date", data["timestamp"].max().date())
-        )
-    
+        # Get default end date
+        if data.empty:
+            default_end = datetime.now().date()
+        else:
+            default_end = data["timestamp"].max().tz_localize(None) + pd.Timedelta(days=7)
+        
+        # Convert to timezone-aware datetime
+        selected_end = st.date_input("End date", value=default_end)
+        end_date = pd.to_datetime(selected_end).tz_localize('UTC')  # Add UTC timezone
+        
     # State filter
     states = sorted(data["state"].unique())
     selected_states = st.sidebar.multiselect("States", states, default=[])
@@ -1062,6 +1080,10 @@ def main():
         # Create sidebar filters
         filters = create_sidebar_filters(data)
         theme = set_theme(filters["theme_name"])
+
+        # st.write("Data timestamp timezone:", data["timestamp"].dt.tz)
+        # st.write("Filter start_date timezone:", filters["start_date"].tzinfo)
+        # st.write("Filter end_date timezone:", filters["end_date"].tzinfo)
         
         # Apply filters
         filtered_data = filter_data(data, filters)
