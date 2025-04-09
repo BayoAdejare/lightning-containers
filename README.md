@@ -101,8 +101,8 @@ lightning-containers/
 │       └── docker-image.yml
 ├── data/
 │   ├── Load/
-│   ├── Processed/
-│   └── Analytics/
+│   ├── Transform/
+│   └── Extract/
 ├── docker-compose.yml
 ├── .dockerignore
 ├── .gitignore
