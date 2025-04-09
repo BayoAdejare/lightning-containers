@@ -18,4 +18,4 @@ venv/
 *.egg-info/
 *.egg
 .env
-data/Load/glmFlash.db
+# data/Load/glmFlash.db
