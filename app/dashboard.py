@@ -144,7 +144,7 @@ def load_data() -> pd.DataFrame:
     """Load data from the database"""
     try:
         conn = st.connection("flash_db", type="sql")
-        data = conn.query("SELECT * FROM vw_flash ORDER BY timestamp DESC;")
+        data = conn.query("SELECT * FROM vw_flash ORDER BY timestamp DESC LIMIT 100000;")
 
         if data.empty:
             st.error("No data found in database")
