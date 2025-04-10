@@ -256,9 +256,9 @@ async def main_pipeline() -> None:
     try:
         # Execute ETL ingestion
         etl_result = await etl_ingest(
-            start_date="05/04/2025",
+            start_date="05/03/2025",
             end_date="05/04/2025",
-            hours=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23]
+            hours=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
         )
         
         if etl_result["success_rate"] < 0.95:
