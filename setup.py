@@ -15,6 +15,7 @@ backend_requires = [
     "netCDF4==1.7.2",
     "boto3==1.28.44",
     "botocore==1.31.44",
+    "duckdb==1.2.2",
     "SQLAlchemy==2.0.40",
     "tqdm==4.66.3",
     "scikit-learn==1.5.0",
@@ -38,7 +39,7 @@ test_requires = [
 
 setup(
     name="lightning_containers",
-    version="0.0.2",
+    version="0.0.3",
     packages=find_packages(exclude=["tests", "tests.*"]),
     python_requires=">=3.10",
     install_requires=core_requires,
