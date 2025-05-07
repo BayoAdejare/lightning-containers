@@ -6,8 +6,8 @@ from sklearn.metrics import silhouette_score
 
 def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     """Preprocess the data"""
-    # remove duplicates
-    df.drop_duplicates(subset=["ts_date"], inplace=True)
+    # filter for only weather related
+    df = df[df["Event Type"].str.contains("Weather", na=False)]
     geo_df = df
     return geo_df
 

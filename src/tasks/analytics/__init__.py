@@ -1,9 +1,9 @@
 import os
 
-import sqlite3 as db
+import duckdb as db
 import pandas as pd
 
-from prefect import task
+from prefect import task, get_run_logger
 from .clustering import preprocess, kmeans_model, sil_evaluation, elb_evaluation
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -16,6 +16,7 @@ hours = dt.strftime("%H")
 
 
 def db_connect(process: str):
+    
     basepath = Path(__file__).resolve().parent.parent.parent.parent
     load_path = Path("data/Load")
     dest_folder = os.path.join(basepath, load_path)
@@ -46,14 +47,39 @@ def db_connect(process: str):
     retries=3,
     retry_delay_seconds=15,
 )
-def preprocessor():
+def preprocessor(df):
+    logger = get_run_logger()
     # config data load
-    df = db_connect("preprocess")
-    print("Starting file extracts for glm ...")
+    # df = db_connect("preprocess")
+    logger.info(f"Starting file extracts for historical outages: {df}")
     results = []
-    preprocessing = preprocess(df)
-    results = pd.DataFrame(preprocessing)
-    return results
+    
+    # Load FIPS code to coordinate mapping
+    try:
+    # Load from authoritative source
+        fips_df = pd.read_csv("src/data/Raw/CenPop2020_Mean_CO.txt", 
+                            dtype={'STATEFP': str, 'COUNTYFP': str})
+        fips_df['FIPS'] = fips_df['STATEFP'] + fips_df['COUNTYFP']
+        fips_df = fips_df[['FIPS', 'LATITUDE', 'LONGITUDE']].rename(
+            columns={'LATITUDE': 'latitude', 'LONGITUDE': 'longitude'}
+        )
+    except Exception as e:
+        st.error(f"Failed to load FIPS coordinates: {str(e)}")
+    
+    # Process outage data
+    if not df.empty:
+        # Convert FIPS to string with leading zeros
+        df['fips'] = df['fips'].astype(str).str.zfill(5)
+        
+        # Merge with coordinates
+        df = df.merge(
+            fips_df,
+            left_on='fips',
+            right_on='FIPS',
+            how='left'
+        )
+
+    return df # results
 
 
 @task(
@@ -64,11 +90,11 @@ def preprocessor():
 )
 def kmeans_cluster(preprocessor: pd.DataFrame):
     k = int(os.getenv("NUM_OF_CLUSTERS", 12))
-    print(f"Starting cluster model, k={k}...")
+    logger.info(f"Starting cluster model, k={k}...")
     results = []
     clusters = kmeans_model(preprocessor, k)
     results = pd.DataFrame(clusters)
-    print(f"Generated cluster model ...")
+    logger.info(f"Generated cluster model ...")
     # save clusters to db
     conn = db_connect("model")
     results.to_sql("results", conn, if_exists="append", index=False)
@@ -82,11 +108,11 @@ def kmeans_cluster(preprocessor: pd.DataFrame):
     retry_delay_seconds=15,
 )
 def silhouette_evaluator(kmeans_cluster: pd.DataFrame):
-    print(f"Starting silhouette evaluation ...")
+    logger.info(f"Starting silhouette evaluation ...")
     sil_coefficients = sil_evaluation(kmeans_cluster)
     results = sil_coefficients.set_index("k", drop=True)
     k_max = results["silhouette_coefficient"].argmax()
-    print(f"Silhoutte coefficients: {results}")
+    logger.info(f"Silhoutte coefficients: {results}")
     os.environ["NUM_OF_CLUSTERS"] = str(k_max)
     # todo: save evaluations db
     return results
@@ -99,10 +125,10 @@ def silhouette_evaluator(kmeans_cluster: pd.DataFrame):
     retry_delay_seconds=15,
 )
 def elbow_evaluator(kmeans_cluster: pd.DataFrame):
-    print(f"Starting elbow evaluation: {kmeans_cluster}")
+    logger.info(f"Starting elbow evaluation: {kmeans_cluster}")
     results = []
     elb_sse = elb_evaluation(kmeans_cluster)
     results.append(elb_sse)
-    print(f"Elbow SSE ...")
+    logger.info(f"Elbow SSE ...")
     # todo: save evaluations db
     return results

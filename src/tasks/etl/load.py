@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import logging
 from pathlib import Path
-import sqlite3 as db
+import duckdb as db
 from typing import Optional
 import pandas as pd
 import shutil
@@ -86,16 +86,12 @@ def load_tbl(load_folder: str) -> Optional[pd.DataFrame]:
             )
             
             # Maintain database
-            conn.execute("VACUUM")
-            conn.execute("""
-                CREATE VIEW IF NOT EXISTS vw_flash AS
+            conn.sql("""
+                CREATE OR REPLACE VIEW vw_flash AS
                 SELECT *,
                     CAST(strftime('%Y', timestamp) AS INTEGER) AS year,
                     CAST(strftime('%m', timestamp) AS INTEGER) AS month,
-                    CAST(strftime('%d', timestamp) AS INTEGER) AS day,
-                    null AS cluster,       
-                    null AS state,
-                    null AS time_period  
+                    CAST(strftime('%d', timestamp) AS INTEGER) AS day
                 FROM tbl_flash;
             """)
 

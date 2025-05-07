@@ -11,6 +11,7 @@ boto3==1.28.44
 botocore==1.31.44
 
 # Database
+duckdb==1.2.2
 SQLAlchemy==2.0.30
 asyncpg==0.29.0
 psycopg2-binary==2.9.9
